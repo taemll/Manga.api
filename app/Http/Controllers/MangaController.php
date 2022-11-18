@@ -14,10 +14,14 @@ class MangaController extends Controller
 
     public function create(Request $request){
         $manga=Manga::create([
+        'type_id' =>$request->type_id,
         'title'=>$request->title,
+        'release_age' =>$request->release_age,
         'author_id'=>$request->author_id,
         'genre_id'=>$request->genre_id,
-        'publisher_id'=>$request->publisher_id]);
+        'publisher_id'=>$request->publisher_id
+        'description' =>$request->description,
+        'img_link' =>$request->img_link]);
         return $manga;
     }
 
@@ -28,9 +32,15 @@ class MangaController extends Controller
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $manga->update(['title'=>$request->title, 
-        'author_id'=>$request->author_id,
-        'genre_id'=>$request->genre_id, 'publisher'=>$request->publisher]);
+        $manga->update([
+            'type_id' =>$request->type_id,
+            'title'=>$request->title,
+            'release_age' =>$request->release_age,
+            'author_id'=>$request->author_id,
+            'genre_id'=>$request->genre_id,
+            'publisher_id'=>$request->publisher_id
+            'description' =>$request->description,
+            'img_link' =>$request->img_link]);
         return response()->json('Successfully updated', 201);
     }
 

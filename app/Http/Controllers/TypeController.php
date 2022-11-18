@@ -3,38 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Genre;
+use App\Models\Type;
 
-class GenreController extends Controller
+class TypeController extends Controller
 {
     public function show(){
-        $genre=Genre::get();
-        return $genre;
+        $type=Type::get();
+        return $type;
     }
 
     public function create(Request $request){
-        $genre=Genre::updateOrCreate(['name'=>$request->name]);
-        return $genre;
+        $type=Type::create(['name'=>$request->name]);
+        return $type;
     }
 
     public function update(Request $request, $id){
         try{
-            $genre=Genre::findOrFail($id);
+            $type=Type::findOrFail($id);
         }
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $genre->update(['name'=>$request->name]);
+        $type->update(['name'=>$request->name]);
         return response()->json('Successfully updated', 201);
     }
 
     public function delete($id){
         try{
-            $genre = Genre::findOrFail($id);
+            $type = Type::findOrFail($id);
         } catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $genre->delete();
+        $type->delete();
         return response()->json('Successfully deleted', 204);
     }
 }

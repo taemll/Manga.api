@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('manga', function (Blueprint $table) {
+        Schema::create('type', function (Blueprint $table) {
             $table->id();
-            $table->integer('type_id');
-            $table->string('title')->nullable();
-            $table->integer('release_age');
-            $table->integer('author_id');
-            $table->integer('genre_id');
-            $table->integer('publisher_id');
-            $table->string('description');
-            $table->string('img_link');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manga');
+        Schema::dropIfExists('type');
     }
 };

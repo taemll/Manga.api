@@ -10,10 +10,14 @@ class Manga extends Model
     protected $table = 'manga';
     protected $fillable = [
         'id',
+        'type_id',
         'title',
+        'release_age',
         'author_id' ,
         'genre_id',
         'publisher_id',
+        'description',
+        'img_link'
     ];
     use HasFactory;
 
@@ -32,5 +36,7 @@ class Manga extends Model
     public function comment(){
         return $this->hasMany(Comment::class);
     }
-    
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }
