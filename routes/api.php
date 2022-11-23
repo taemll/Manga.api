@@ -8,30 +8,30 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\TypeController;
 
-Route::get('showmanga', [MangaController::class, 'show']);
-Route::post('createmanga', [MangaController::class, 'create']);
-Route::put('updatemanga/{id}', [MangaController::class, 'update']);
-Route::delete('deletemanga/{id}', [MangaController::class, 'delete']);
+Route::get('manga', [MangaController::class, 'show']);
+Route::post('manga', [MangaController::class, 'create']);
+Route::put('manga/{id}', [MangaController::class, 'update']);
+Route::delete('manga/{id}', [MangaController::class, 'delete']);
 
-Route::get('showAuthor', [AuthorController::class, 'show']);
-Route::post('createAuthor', [AuthorController::class, 'create']);
-Route::put('updateAuthor/{id}', [AuthorController::class, 'update']);
-Route::delete('deleteAuthor/{id}', [AuthorController::class, 'delete']);
+Route::get('author', [AuthorController::class, 'show']);
+Route::post('author', [AuthorController::class, 'create']);
+Route::put('author/{id}', [AuthorController::class, 'update']);
+Route::delete('author/{id}', [AuthorController::class, 'delete']);
 
-Route::get('showGenre', [GenreController::class, 'show']);
-Route::post('createGenre', [GenreController::class, 'create']);
-Route::put('updateGenre/{id}', [GenreController::class, 'update']);
-Route::delete('deleteGenre/{id}', [GenreController::class, 'delete']);
+Route::get('genre', [GenreController::class, 'show']);
+Route::post('genre', [GenreController::class, 'create']);
+Route::put('genre/{id}', [GenreController::class, 'update']);
+Route::delete('genre/{id}', [GenreController::class, 'delete']);
 
-Route::get('showPublisher', [PublisherController::class, 'show']);
-Route::post('createPublisher', [PublisherController::class, 'create']);
-Route::put('updatePublisher/{id}', [PublisherController::class, 'update']);
-Route::delete('deletePublisher/{id}', [PublisherController::class, 'delete']);
+Route::get('publisher', [PublisherController::class, 'show']);
+Route::post('publisher', [PublisherController::class, 'create']);
+Route::put('publisher/{id}', [PublisherController::class, 'update']);
+Route::delete('publisher/{id}', [PublisherController::class, 'delete']);
 
-Route::get('showType', [TypeController::class, 'show']);
-Route::post('createType', [TypeController::class, 'create']);
-Route::put('updateType/{id}', [TypeController::class, 'update']);
-Route::delete('deleteType/{id}', [TypeController::class, 'delete']);
+Route::get('type', [TypeController::class, 'show']);
+Route::post('type', [TypeController::class, 'create']);
+Route::put('type/{id}', [TypeController::class, 'update']);
+Route::delete('type/{id}', [TypeController::class, 'delete']);
 
 /*
 |--------------------------------------------------------------------------

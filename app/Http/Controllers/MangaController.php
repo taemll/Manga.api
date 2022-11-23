@@ -7,8 +7,15 @@ use App\Models\Manga;
 
 class MangaController extends Controller
 {
-    public function show(){
-        $manga=Manga::get();
+    public function show(Request $request){
+        $data=$request->validate([
+            'title'=> ['max:255', 'string']
+        ]);
+        $manga_collection=Manga::query();
+        if(!empty($data['title'])){
+            $manga_collection->where(DB::raw('LOWER(title)'), 'like', '%'.strtolower($data['title']).'%');
+        }
+        $manga = $manga_collection->paginate(20);
         return $manga;
     }
 
@@ -19,7 +26,7 @@ class MangaController extends Controller
         'release_age' =>$request->release_age,
         'author_id'=>$request->author_id,
         'genre_id'=>$request->genre_id,
-        'publisher_id'=>$request->publisher_id
+        'publisher_id'=>$request->publisher_id,
         'description' =>$request->description,
         'img_link' =>$request->img_link]);
         return $manga;
@@ -38,7 +45,7 @@ class MangaController extends Controller
             'release_age' =>$request->release_age,
             'author_id'=>$request->author_id,
             'genre_id'=>$request->genre_id,
-            'publisher_id'=>$request->publisher_id
+            'publisher_id'=>$request->publisher_id,
             'description' =>$request->description,
             'img_link' =>$request->img_link]);
         return response()->json('Successfully updated', 201);
