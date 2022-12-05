@@ -13,18 +13,24 @@ class PublisherController extends Controller
     }
 
     public function create(Request $request){
-        $publisher=Publisher::updateOrCreate(['name'=>$request->name]);
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
+        $publisher=Publisher::updateOrCreate(['name'=>$data['name']]);
         return $publisher;
     }
 
     public function update(Request $request, $id){
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
         try{
             $publisher=Publisher::findOrFail($id);
         }
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $publisher->update(['name'=>$request->name]);
+        $publisher->update(['name'=>$data['name']]);
         return response()->json('Successfully updated', 201);
     }
 

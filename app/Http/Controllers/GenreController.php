@@ -13,18 +13,24 @@ class GenreController extends Controller
     }
 
     public function create(Request $request){
-        $genre=Genre::updateOrCreate(['name'=>$request->name]);
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
+        $genre=Genre::updateOrCreate(['name'=>$data['name']]);
         return $genre;
     }
 
     public function update(Request $request, $id){
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
         try{
             $genre=Genre::findOrFail($id);
         }
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $genre->update(['name'=>$request->name]);
+        $genre->update(['name'=>$data['name']]);
         return response()->json('Successfully updated', 201);
     }
 

@@ -13,18 +13,24 @@ class TypeController extends Controller
     }
 
     public function create(Request $request){
-        $type=Type::create(['name'=>$request->name]);
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
+        $type=Type::create(['name'=>$data['name']]);
         return $type;
     }
 
     public function update(Request $request, $id){
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
         try{
             $type=Type::findOrFail($id);
         }
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $type->update(['name'=>$request->name]);
+        $type->update(['name'=>$data['name']]);
         return response()->json('Successfully updated', 201);
     }
 

@@ -13,18 +13,24 @@ class AuthorController extends Controller
     }
 
     public function create(Request $request){
-        $author=Author::create(['name'=>$request->name]);
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
+        $author=Author::create(['name'=>$data['name']]);
         return $author;
     }
 
     public function update(Request $request, $id){
+        $data=$request->validate([
+            'name'=>['max:255', 'string'],
+        ]);
         try{
             $author=Author::findOrFail($id);
         }
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $author->update(['name'=>$request->name]);
+        $author->update(['name'=>$data['name']]);
         return response()->json('Successfully updated', 201);
     }
 
