@@ -16,7 +16,7 @@ class AuthorController extends Controller
         $data=$request->validate([
             'name'=>['max:255', 'string'],
         ]);
-        $author=Author::create(['name'=>$data['name']]);
+        $author=Author::create($data);
         return $author;
     }
 
@@ -30,8 +30,8 @@ class AuthorController extends Controller
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $author->update(['name'=>$data['name']]);
-        return response()->json('Successfully updated', 201);
+        $author->update($data);
+        return $author;
     }
 
     public function delete($id){

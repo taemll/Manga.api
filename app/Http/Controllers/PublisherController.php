@@ -16,7 +16,7 @@ class PublisherController extends Controller
         $data=$request->validate([
             'name'=>['max:255', 'string'],
         ]);
-        $publisher=Publisher::updateOrCreate(['name'=>$data['name']]);
+        $publisher=Publisher::updateOrCreate($data);
         return $publisher;
     }
 
@@ -24,14 +24,17 @@ class PublisherController extends Controller
         $data=$request->validate([
             'name'=>['max:255', 'string'],
         ]);
+
         try{
             $publisher=Publisher::findOrFail($id);
         }
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $publisher->update(['name'=>$data['name']]);
-        return response()->json('Successfully updated', 201);
+
+        $publisher->update($data);
+
+        return $publisher;
     }
 
     public function delete($id){
@@ -40,7 +43,9 @@ class PublisherController extends Controller
         } catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
+
         $publisher->delete();
+
         return response()->json('Successfully deleted', 204);
     }
 }

@@ -16,7 +16,7 @@ class TypeController extends Controller
         $data=$request->validate([
             'name'=>['max:255', 'string'],
         ]);
-        $type=Type::create(['name'=>$data['name']]);
+        $type=Type::create($data);
         return $type;
     }
 
@@ -30,8 +30,8 @@ class TypeController extends Controller
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $type->update(['name'=>$data['name']]);
-        return response()->json('Successfully updated', 201);
+        $type->update($data);
+        return $type;
     }
 
     public function delete($id){

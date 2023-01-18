@@ -4,16 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Chapter;
 
-class Comment extends Model
+class Page extends Model
 {
     protected $fillable = [
-        'manga_id',
-        'text',
-        'user_id',
+        'id',
+        'chapter_id',
+        'img_link',
     ];
     use HasFactory;
-    public function manga(){
-        return $this->belongsTo(Manga::class);
+
+    public function chapter(){
+        return $this->belongsTo(Chapter::class);
     }
 }

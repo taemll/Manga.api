@@ -16,7 +16,7 @@ class GenreController extends Controller
         $data=$request->validate([
             'name'=>['max:255', 'string'],
         ]);
-        $genre=Genre::updateOrCreate(['name'=>$data['name']]);
+        $genre=Genre::updateOrCreate($data);
         return $genre;
     }
 
@@ -30,8 +30,8 @@ class GenreController extends Controller
         catch(\Exception $exception){
             throw new NotFoundException('not found');
         }
-        $genre->update(['name'=>$data['name']]);
-        return response()->json('Successfully updated', 201);
+        $genre->update($data);
+        return $genre;
     }
 
     public function delete($id){

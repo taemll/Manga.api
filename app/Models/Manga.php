@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Chapter;
 
 class Manga extends Model
 {
@@ -24,19 +25,16 @@ class Manga extends Model
     public function author(){
         return $this->belongsTo(Author::class);
     }
-    public function genres(){
-        return $this->belongsToMany(Genre::class);
+    public function genre(){
+        return $this->belongsTo(Genre::class);
     }
     public function publisher(){
         return $this->belongsTo(Publisher::class);
     }
-    public function rating(){
-        return $this->hasOne(Rating::class);
-    }
-    public function comment(){
-        return $this->hasMany(Comment::class);
-    }
     public function type(){
         return $this->belongsTo(Type::class);
+    }
+    public function chapters(){
+        return $this->hasMany(Chapter::class);
     }
 }
